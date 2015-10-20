@@ -7,7 +7,7 @@ from emd import emd
 import gensim
 
 
-class WCDQA:
+class WMDQA:
     def __init__(self, model="default", vecsize=300):
         if (model == "default"):
             self.model = gensim.models.Word2Vec.load_word2vec_format(
@@ -149,7 +149,7 @@ if __name__ == "__main__":
 
     question = "Where is the football?"
 
-    wmdqa = WCDQA()
+    wmdqa = WMDQA()
     top_mems = wmdqa.getTopRelativeMemories(question, data, 5)
     print top_mems
     data = np.array(data)[top_mems]
