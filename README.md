@@ -9,7 +9,7 @@ Original Author's site: http://mkusner.github.io/
 
 Do the following to run
 
-1. ``cd python-emd-master``, then ``make``
+1. Read README.C.md and type ``make``
 2. Change the default model inside wdmqa.py WMDAQA class or provide a model. Models are word2vec implementations
 3. Hack around WCDAQ main method 
 

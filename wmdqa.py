@@ -1,8 +1,6 @@
 __author__ = 'ssamot'
 
-import pdb, sys, numpy as np, pickle, multiprocessing as mp, string
-
-sys.path.append('python-emd-master')
+import numpy as np, string
 from emd import emd
 import gensim
 
