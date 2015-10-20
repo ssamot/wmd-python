@@ -7,9 +7,8 @@ Original code: https://github.com/renaud/wmd
 
 Original Author's site: http://mkusner.github.io/ 
 
-Do the following to run
+Do the following to run wdmqa.py:
 
 1. Read README.C.md and type ``make``
 2. Change the default model inside wdmqa.py WMDAQA class or provide a model. Models are word2vec implementations
 3. Hack around WCDAQ main method 
-
