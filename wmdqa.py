@@ -19,7 +19,7 @@ class WMDQA:
     def _read_line_by_line(self, lines, C, vec_size):
         # get stop words (except for twitter!)
         SW = set()
-        for line in open('stop_words.txt'):
+        for line in open('/home/ssamot/projects/wmd-python/stop_words.txt'):
             line = line.strip()
             if line != '':
                 SW.add(line)
@@ -36,6 +36,7 @@ class WMDQA:
         the_words = np.zeros((num_lines,), dtype=np.object)
         for line in lines:
             # print '%d out of %d' % (count+1, num_lines)
+            line = str(line)
             line = line.strip()
             line = line.translate(string.maketrans("", ""), string.punctuation)
 
@@ -115,9 +116,12 @@ class WMDQA:
 
     def getTopRelativeMemories(self, question, data, hops):
         argmins = []
-        data = data[:]
+        data = list(data[:])
+        hops = min(hops, len(data))
+        question = str(question)
+        words_explored = []
         for i in range(hops):
-            sims = wmdqa.processqawmd(question, data)
+            sims = self.processqawmd(question, data)
             # sims = processqawcd(question, data)
             argmin = sims.argmin()
             # print data[argmin]
@@ -130,22 +134,34 @@ class WMDQA:
 
 
 if __name__ == "__main__":
-    data = """ Mary moved to the bathroom.
-             Sandra journeyed to the bedroom.
-            Mary got the football there.
-            John went to the kitchen.
-            Mary went back to the kitchen.
-            Mary went back to the garden.
-            Sandra went back to the office.
-            John moved to the office.
-            Sandra journeyed to the hallway.
-            Daniel went back to the kitchen.
-            Mary dropped the football.
-            John got the milk there."""
-
+    data = """ John took the football there .
+    John left the football .
+    Mary went back to the bathroom .
+    Sandra got the football there .
+    Daniel journeyed to the kitchen .
+    John journeyed to the bedroom .
+    Sandra dropped the football .
+    Mary moved to the kitchen .
+    Daniel grabbed the apple there .
+     Mary went to the bathroom .
+     Mary moved to the bedroom .
+     John went back to the bathroom .
+     Daniel discarded the apple there .
+     Mary travelled to the kitchen .
+     Sandra picked up the football there .
+     Sandra left the football there .
+     Mary went to the hallway .
+     Daniel got the apple there .
+     Daniel travelled to the hallway .
+     Mary took the football there .
+     John travelled to the hallway .
+     Mary put down the football."""
+#hallway 20 21
     data = data.split("\n")
 
-    question = "Where is the football?"
+    print data
+
+    question = "Where is the football ?"
 
     wmdqa = WMDQA()
     top_mems = wmdqa.getTopRelativeMemories(question, data, 5)
